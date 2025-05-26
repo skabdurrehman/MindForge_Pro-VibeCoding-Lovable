@@ -1,3 +1,4 @@
+
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 export interface LectureDay {
@@ -70,6 +71,126 @@ const defaultBadges: Badge[] = [
     icon: '💯',
     earned: false,
     requirement: 'Earn 100 total XP'
+  },
+  {
+    id: 'month-master',
+    name: 'Month Master',
+    description: 'Completed a full month!',
+    icon: '👑',
+    earned: false,
+    requirement: 'Complete 30 consecutive days'
+  },
+  {
+    id: 'xp-legend',
+    name: 'XP Legend',
+    description: 'Reached 500 XP!',
+    icon: '🚀',
+    earned: false,
+    requirement: 'Earn 500 total XP'
+  },
+  {
+    id: 'dedication-master',
+    name: 'Dedication Master',
+    description: 'Completed 50 days!',
+    icon: '🏆',
+    earned: false,
+    requirement: 'Complete 50 consecutive days'
+  },
+  {
+    id: 'knowledge-seeker',
+    name: 'Knowledge Seeker',
+    description: 'Completed 100 lectures!',
+    icon: '📚',
+    earned: false,
+    requirement: 'Complete 100 total lectures'
+  },
+  {
+    id: 'unstoppable',
+    name: 'Unstoppable',
+    description: 'Completed 100 days streak!',
+    icon: '💪',
+    earned: false,
+    requirement: 'Complete 100 consecutive days'
+  },
+  {
+    id: 'xp-titan',
+    name: 'XP Titan',
+    description: 'Reached 1000 XP!',
+    icon: '⚡',
+    earned: false,
+    requirement: 'Earn 1000 total XP'
+  },
+  {
+    id: 'genius-level',
+    name: 'Genius Level',
+    description: 'Completed 500 lectures!',
+    icon: '🧠',
+    earned: false,
+    requirement: 'Complete 500 total lectures'
+  },
+  {
+    id: 'year-champion',
+    name: 'Year Champion',
+    description: 'Completed 365 days!',
+    icon: '🎖️',
+    earned: false,
+    requirement: 'Complete 365 consecutive days'
+  },
+  {
+    id: 'ultimate-scholar',
+    name: 'Ultimate Scholar',
+    description: 'Completed 1000 lectures!',
+    icon: '🌟',
+    earned: false,
+    requirement: 'Complete 1000 total lectures'
+  },
+  {
+    id: 'xp-god',
+    name: 'XP God',
+    description: 'Reached 5000 XP!',
+    icon: '🔮',
+    earned: false,
+    requirement: 'Earn 5000 total XP'
+  },
+  {
+    id: 'marathon-runner',
+    name: 'Marathon Runner',
+    description: 'Completed 200 days streak!',
+    icon: '🏃‍♂️',
+    earned: false,
+    requirement: 'Complete 200 consecutive days'
+  },
+  {
+    id: 'lecture-machine',
+    name: 'Lecture Machine',
+    description: 'Completed 10 lectures in one day!',
+    icon: '🤖',
+    earned: false,
+    requirement: 'Complete 10 lectures in one day'
+  },
+  {
+    id: 'consistency-king',
+    name: 'Consistency King',
+    description: 'Completed 300 days streak!',
+    icon: '👑',
+    earned: false,
+    requirement: 'Complete 300 consecutive days'
+  },
+  {
+    id: 'xp-master',
+    name: 'XP Master',
+    description: 'Reached 2500 XP!',
+    icon: '🎯',
+    earned: false,
+    requirement: 'Earn 2500 total XP'
+  },
+  {
+    id: 'learning-legend',
+    name: 'Learning Legend',
+    description: 'Completed 2000 lectures!',
+    icon: '📖',
+    earned: false,
+    requirement: 'Complete 2000 total lectures'
   }
 ];
 
@@ -107,7 +228,6 @@ export function HabitProvider({ children }: { children: React.ReactNode }) {
   const addLecture = (date: string) => {
     setLectureData(prev => {
       const existing = prev[date] || { date, lectures: 0, xp: 0, badges: [] };
-      // Remove the limit of 3 lectures
       const newLectures = existing.lectures + 1;
       const newXP = existing.xp + 10 * getMultiplier(date);
       return {
@@ -205,30 +325,37 @@ export function HabitProvider({ children }: { children: React.ReactNode }) {
       const streak = getStreak();
       const todayData = getTodayData();
       const hasCompletedLecture = Object.values(lectureData).some(day => day.lectures > 0);
+      const totalLectures = Object.values(lectureData).reduce((sum, day) => sum + day.lectures, 0);
       
-      // First Steps badge
-      if (!newBadges[0].earned && hasCompletedLecture) {
-        newBadges[0] = { ...newBadges[0], earned: true, dateEarned: new Date().toISOString() };
-      }
-      
-      // Perfect Day badge
-      if (!newBadges[3].earned && todayData.lectures >= 3) {
-        newBadges[3] = { ...newBadges[3], earned: true, dateEarned: new Date().toISOString() };
-      }
-      
-      // Streak badges
-      if (!newBadges[1].earned && streak >= 3) {
-        newBadges[1] = { ...newBadges[1], earned: true, dateEarned: new Date().toISOString() };
-      }
-      
-      if (!newBadges[2].earned && streak >= 7) {
-        newBadges[2] = { ...newBadges[2], earned: true, dateEarned: new Date().toISOString() };
-      }
-      
-      // Century Club badge
-      if (!newBadges[4].earned && totalXP >= 100) {
-        newBadges[4] = { ...newBadges[4], earned: true, dateEarned: new Date().toISOString() };
-      }
+      // Check all badge conditions
+      const badgeChecks = [
+        { index: 0, condition: hasCompletedLecture }, // First Steps
+        { index: 1, condition: streak >= 3 }, // On Fire
+        { index: 2, condition: streak >= 7 }, // Weekly Warrior
+        { index: 3, condition: todayData.lectures >= 3 }, // Perfect Day
+        { index: 4, condition: totalXP >= 100 }, // Century Club
+        { index: 5, condition: streak >= 30 }, // Month Master
+        { index: 6, condition: totalXP >= 500 }, // XP Legend
+        { index: 7, condition: streak >= 50 }, // Dedication Master
+        { index: 8, condition: totalLectures >= 100 }, // Knowledge Seeker
+        { index: 9, condition: streak >= 100 }, // Unstoppable
+        { index: 10, condition: totalXP >= 1000 }, // XP Titan
+        { index: 11, condition: totalLectures >= 500 }, // Genius Level
+        { index: 12, condition: streak >= 365 }, // Year Champion
+        { index: 13, condition: totalLectures >= 1000 }, // Ultimate Scholar
+        { index: 14, condition: totalXP >= 5000 }, // XP God
+        { index: 15, condition: streak >= 200 }, // Marathon Runner
+        { index: 16, condition: todayData.lectures >= 10 }, // Lecture Machine
+        { index: 17, condition: streak >= 300 }, // Consistency King
+        { index: 18, condition: totalXP >= 2500 }, // XP Master
+        { index: 19, condition: totalLectures >= 2000 }, // Learning Legend
+      ];
+
+      badgeChecks.forEach(({ index, condition }) => {
+        if (!newBadges[index].earned && condition) {
+          newBadges[index] = { ...newBadges[index], earned: true, dateEarned: new Date().toISOString() };
+        }
+      });
       
       return newBadges;
     });

@@ -1,14 +1,12 @@
 
 import { useState } from 'react';
-import { useTheme } from '@/components/ThemeProvider';
 import Navigation from '@/components/Navigation';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
-import { Moon, Sun, Download, Trash2, Volume2, VolumeX } from 'lucide-react';
+import { Download, Trash2, Volume2, VolumeX } from 'lucide-react';
 
 const Settings = () => {
-  const { theme, setTheme } = useTheme();
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [showConfirmReset, setShowConfirmReset] = useState(false);
 
@@ -23,7 +21,7 @@ const Settings = () => {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `studyflow-backup-${new Date().toISOString().split('T')[0]}.json`;
+    a.download = `mindforge-backup-${new Date().toISOString().split('T')[0]}.json`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -46,40 +44,6 @@ const Settings = () => {
           </h1>
           <p className="text-muted-foreground">Customize your experience</p>
         </div>
-
-        {/* Appearance */}
-        <Card className="bg-gradient-to-br from-slate-800/50 to-purple-800/30 border-purple-500/30">
-          <CardHeader>
-            <CardTitle>Appearance</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-3">
-                {theme === 'dark' ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
-                <div>
-                  <div className="font-medium">Theme</div>
-                  <div className="text-sm text-muted-foreground">Choose your preferred theme</div>
-                </div>
-              </div>
-              <div className="flex space-x-2">
-                <Button
-                  variant={theme === 'light' ? 'default' : 'outline'}
-                  size="sm"
-                  onClick={() => setTheme('light')}
-                >
-                  Light
-                </Button>
-                <Button
-                  variant={theme === 'dark' ? 'default' : 'outline'}
-                  size="sm"
-                  onClick={() => setTheme('dark')}
-                >
-                  Dark
-                </Button>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
 
         {/* Audio */}
         <Card className="bg-gradient-to-br from-slate-800/50 to-purple-800/30 border-purple-500/30">
@@ -176,11 +140,11 @@ const Settings = () => {
         {/* About */}
         <Card className="bg-gradient-to-br from-slate-800/50 to-purple-800/30 border-purple-500/30">
           <CardHeader>
-            <CardTitle>About StudyFlow</CardTitle>
+            <CardTitle>About MindForge Pro</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-2 text-sm text-muted-foreground">
-              <p>Version 1.0.0</p>
+              <p>Version 2.0.0</p>
               <p>A gamified habit tracker designed for students and self-learners.</p>
               <p>Built with React, TypeScript, and Tailwind CSS.</p>
             </div>

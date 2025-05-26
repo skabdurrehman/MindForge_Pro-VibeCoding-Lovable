@@ -12,8 +12,6 @@ const Dashboard = () => {
   const totalXP = getTotalXP();
   const currentStreak = getStreak();
 
-  const todayQuote = "Koshish jaari rakh, Zaroor safal tera kaam hoga, Kadmo me there Jahan aur sabse upar tera Naam hoga.";
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white pb-20">
       <div className="container mx-auto px-4 py-8 space-y-8">
@@ -22,9 +20,10 @@ const Dashboard = () => {
           <h1 className="text-5xl font-black bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent tracking-wider">
             MindForge Pro
           </h1>
-          <p className="text-purple-300 italic font-semibold text-lg leading-relaxed max-w-2xl mx-auto">
-            "{todayQuote}"
-          </p>
+          <div className="text-purple-300 italic font-semibold text-lg leading-relaxed max-w-2xl mx-auto">
+            <p>"Koshish jaari rakh, Zaroor safal tera kaam hoga,</p>
+            <p>Kadmo me there Jahan aur sabse upar tera Naam hoga." 💪</p>
+          </div>
         </div>
 
         {/* Stats Cards with enhanced effects */}
