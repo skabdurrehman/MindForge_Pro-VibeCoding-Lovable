@@ -208,7 +208,13 @@ export function HabitProvider({ children }: { children: React.ReactNode }) {
     }
     
     if (savedBadges) {
-      setBadges(JSON.parse(savedBadges));
+      const parsedBadges = JSON.parse(savedBadges);
+      // Ensure saved badges match the current structure by merging with defaults
+      const mergedBadges = defaultBadges.map((defaultBadge, index) => {
+        const savedBadge = parsedBadges[index];
+        return savedBadge && savedBadge.id === defaultBadge.id ? savedBadge : defaultBadge;
+      });
+      setBadges(mergedBadges);
     }
   }, []);
 
@@ -327,7 +333,7 @@ export function HabitProvider({ children }: { children: React.ReactNode }) {
       const hasCompletedLecture = Object.values(lectureData).some(day => day.lectures > 0);
       const totalLectures = Object.values(lectureData).reduce((sum, day) => sum + day.lectures, 0);
       
-      // Check all badge conditions
+      // Define badge checks with safe array access
       const badgeChecks = [
         { index: 0, condition: hasCompletedLecture }, // First Steps
         { index: 1, condition: streak >= 3 }, // On Fire
@@ -351,9 +357,14 @@ export function HabitProvider({ children }: { children: React.ReactNode }) {
         { index: 19, condition: totalLectures >= 2000 }, // Learning Legend
       ];
 
+      // Safely check and award badges
       badgeChecks.forEach(({ index, condition }) => {
-        if (!newBadges[index].earned && condition) {
-          newBadges[index] = { ...newBadges[index], earned: true, dateEarned: new Date().toISOString() };
+        if (index < newBadges.length && newBadges[index] && !newBadges[index].earned && condition) {
+          newBadges[index] = { 
+            ...newBadges[index], 
+            earned: true, 
+            dateEarned: new Date().toISOString() 
+          };
         }
       });
       
