@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 export interface LectureDay {
@@ -108,19 +107,17 @@ export function HabitProvider({ children }: { children: React.ReactNode }) {
   const addLecture = (date: string) => {
     setLectureData(prev => {
       const existing = prev[date] || { date, lectures: 0, xp: 0, badges: [] };
-      if (existing.lectures < 3) {
-        const newLectures = existing.lectures + 1;
-        const newXP = existing.xp + 10 * getMultiplier(date);
-        return {
-          ...prev,
-          [date]: {
-            ...existing,
-            lectures: newLectures,
-            xp: newXP
-          }
-        };
-      }
-      return prev;
+      // Remove the limit of 3 lectures
+      const newLectures = existing.lectures + 1;
+      const newXP = existing.xp + 10 * getMultiplier(date);
+      return {
+        ...prev,
+        [date]: {
+          ...existing,
+          lectures: newLectures,
+          xp: newXP
+        }
+      };
     });
   };
 
