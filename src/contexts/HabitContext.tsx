@@ -32,7 +32,7 @@ const HabitContext = createContext<HabitContextType | undefined>(undefined);
 
 const defaultBadges: Badge[] = [
   {
-    id: 'first-day',
+    id: 'first-lecture',
     name: 'First Steps',
     description: 'Completed your first lecture!',
     icon: '🎯',
@@ -50,10 +50,42 @@ const defaultBadges: Badge[] = [
   {
     id: 'perfect-day',
     name: 'Perfect Day',
-    description: 'Completed all 3 lectures in a day!',
+    description: 'Completed all 3 daily lectures!',
     icon: '⭐',
     earned: false,
     requirement: 'Complete 3 lectures in one day'
+  },
+  {
+    id: 'overachiever',
+    name: 'Overachiever',
+    description: 'Completed 4 lectures in a day!',
+    icon: '💪',
+    earned: false,
+    requirement: 'Complete 4 lectures in one day'
+  },
+  {
+    id: 'backlog-warrior',
+    name: 'Backlog Warrior',
+    description: 'Completed 5 lectures in a day!',
+    icon: '⚔️',
+    earned: false,
+    requirement: 'Complete 5 lectures in one day'
+  },
+  {
+    id: 'super-achiever',
+    name: 'Super Achiever',
+    description: 'Completed 6 lectures in a day!',
+    icon: '🚀',
+    earned: false,
+    requirement: 'Complete 6 lectures in one day'
+  },
+  {
+    id: 'maximum-effort',
+    name: 'Maximum Effort',
+    description: 'Completed 7 lectures in a day!',
+    icon: '👑',
+    earned: false,
+    requirement: 'Complete 7 lectures in one day'
   },
   {
     id: 'three-day-streak',
@@ -67,9 +99,25 @@ const defaultBadges: Badge[] = [
     id: 'weekly-warrior',
     name: 'Weekly Warrior',
     description: 'Completed 7 perfect days in a row!',
-    icon: '⚔️',
+    icon: '⚡',
     earned: false,
     requirement: 'Complete 7 consecutive perfect days'
+  },
+  {
+    id: 'dedication-rookie',
+    name: 'Dedication Rookie',
+    description: 'Completed 14 perfect days in a row!',
+    icon: '🌱',
+    earned: false,
+    requirement: 'Complete 14 consecutive perfect days'
+  },
+  {
+    id: 'month-master',
+    name: 'Month Master',
+    description: 'Completed 30 perfect days in a row!',
+    icon: '🏆',
+    earned: false,
+    requirement: 'Complete 30 consecutive perfect days'
   },
   {
     id: 'century-club',
@@ -80,60 +128,12 @@ const defaultBadges: Badge[] = [
     requirement: 'Earn 100 total XP'
   },
   {
-    id: 'lecture-lover',
-    name: 'Lecture Lover',
-    description: 'Completed 25 lectures!',
-    icon: '📚',
-    earned: false,
-    requirement: 'Complete 25 total lectures'
-  },
-  {
-    id: 'dedication-rookie',
-    name: 'Dedication Rookie',
-    description: 'Completed 10 perfect days!',
-    icon: '🌱',
-    earned: false,
-    requirement: 'Complete 10 consecutive perfect days'
-  },
-  {
-    id: 'month-master',
-    name: 'Month Master',
-    description: 'Completed a full month of perfect days!',
-    icon: '👑',
-    earned: false,
-    requirement: 'Complete 30 consecutive perfect days'
-  },
-  {
     id: 'xp-legend',
     name: 'XP Legend',
     description: 'Reached 500 XP!',
-    icon: '🚀',
+    icon: '🌟',
     earned: false,
     requirement: 'Earn 500 total XP'
-  },
-  {
-    id: 'knowledge-seeker',
-    name: 'Knowledge Seeker',
-    description: 'Completed 100 lectures!',
-    icon: '🔍',
-    earned: false,
-    requirement: 'Complete 100 total lectures'
-  },
-  {
-    id: 'dedication-master',
-    name: 'Dedication Master',
-    description: 'Completed 50 perfect days!',
-    icon: '🏆',
-    earned: false,
-    requirement: 'Complete 50 consecutive perfect days'
-  },
-  {
-    id: 'consistency-champion',
-    name: 'Consistency Champion',
-    description: 'Never missed a single lecture in 2 weeks!',
-    icon: '🎖️',
-    earned: false,
-    requirement: 'Complete 14 consecutive perfect days'
   },
   {
     id: 'xp-titan',
@@ -144,172 +144,92 @@ const defaultBadges: Badge[] = [
     requirement: 'Earn 1000 total XP'
   },
   {
-    id: 'lecture-machine',
-    name: 'Lecture Machine',
-    description: 'Completed 250 lectures!',
-    icon: '🤖',
-    earned: false,
-    requirement: 'Complete 250 total lectures'
-  },
-  {
-    id: 'unstoppable',
-    name: 'Unstoppable',
-    description: 'Completed 100 perfect days streak!',
-    icon: '💪',
-    earned: false,
-    requirement: 'Complete 100 consecutive perfect days'
-  },
-  {
-    id: 'genius-level',
-    name: 'Genius Level',
-    description: 'Completed 500 lectures!',
-    icon: '🧠',
-    earned: false,
-    requirement: 'Complete 500 total lectures'
-  },
-  {
-    id: 'quarter-year-hero',
-    name: 'Quarter Year Hero',
-    description: 'Completed 90 perfect days!',
-    icon: '🦸‍♂️',
-    earned: false,
-    requirement: 'Complete 90 consecutive perfect days'
-  },
-  {
-    id: 'xp-soldier',
-    name: 'XP Soldier',
+    id: 'xp-commander',
+    name: 'XP Commander',
     description: 'Reached 2500 XP!',
-    icon: '🎖️',
+    icon: '👨‍✈️',
     earned: false,
     requirement: 'Earn 2500 total XP'
   },
   {
+    id: 'xp-emperor',
+    name: 'XP Emperor',
+    description: 'Reached 5000 XP!',
+    icon: '👑',
+    earned: false,
+    requirement: 'Earn 5000 total XP'
+  },
+  {
+    id: 'lecture-lover',
+    name: 'Lecture Lover',
+    description: 'Completed 25 lectures!',
+    icon: '📚',
+    earned: false,
+    requirement: 'Complete 25 total lectures'
+  },
+  {
+    id: 'knowledge-seeker',
+    name: 'Knowledge Seeker',
+    description: 'Completed 50 lectures!',
+    icon: '🔍',
+    earned: false,
+    requirement: 'Complete 50 total lectures'
+  },
+  {
+    id: 'lecture-machine',
+    name: 'Lecture Machine',
+    description: 'Completed 100 lectures!',
+    icon: '🤖',
+    earned: false,
+    requirement: 'Complete 100 total lectures'
+  },
+  {
+    id: 'genius-level',
+    name: 'Genius Level',
+    description: 'Completed 200 lectures!',
+    icon: '🧠',
+    earned: false,
+    requirement: 'Complete 200 total lectures'
+  },
+  {
+    id: 'ultimate-scholar',
+    name: 'Ultimate Scholar',
+    description: 'Completed 365 lectures!',
+    icon: '🎓',
+    earned: false,
+    requirement: 'Complete 365 total lectures'
+  },
+  {
+    id: 'consistency-champion',
+    name: 'Consistency Champion',
+    description: 'Completed 60 perfect days in a row!',
+    icon: '🎖️',
+    earned: false,
+    requirement: 'Complete 60 consecutive perfect days'
+  },
+  {
+    id: 'persistence-hero',
+    name: 'Persistence Hero',
+    description: 'Completed 100 perfect days in a row!',
+    icon: '🦸‍♂️',
+    earned: false,
+    requirement: 'Complete 100 consecutive perfect days'
+  },
+  {
     id: 'half-year-champion',
     name: 'Half Year Champion',
-    description: 'Completed 180 perfect days!',
+    description: 'Completed 180 perfect days in a row!',
     icon: '🏅',
     earned: false,
     requirement: 'Complete 180 consecutive perfect days'
   },
   {
-    id: 'marathon-runner',
-    name: 'Marathon Runner',
-    description: 'Completed 200 perfect days streak!',
-    icon: '🏃‍♂️',
-    earned: false,
-    requirement: 'Complete 200 consecutive perfect days'
-  },
-  {
-    id: 'xp-commander',
-    name: 'XP Commander',
-    description: 'Reached 5000 XP!',
-    icon: '👨‍✈️',
-    earned: false,
-    requirement: 'Earn 5000 total XP'
-  },
-  {
-    id: 'ultimate-scholar',
-    name: 'Ultimate Scholar',
-    description: 'Completed 1000 lectures!',
-    icon: '🌟',
-    earned: false,
-    requirement: 'Complete 1000 total lectures'
-  },
-  {
-    id: 'consistency-king',
-    name: 'Consistency King',
-    description: 'Completed 300 perfect days streak!',
-    icon: '👑',
-    earned: false,
-    requirement: 'Complete 300 consecutive perfect days'
-  },
-  {
     id: 'year-champion',
     name: 'Year Champion',
-    description: 'Completed 365 perfect days!',
-    icon: '🎖️',
+    description: 'Completed 365 perfect days in a row!',
+    icon: '🏆',
     earned: false,
     requirement: 'Complete 365 consecutive perfect days'
-  },
-  {
-    id: 'xp-emperor',
-    name: 'XP Emperor',
-    description: 'Reached 10000 XP!',
-    icon: '👑',
-    earned: false,
-    requirement: 'Earn 10000 total XP'
-  },
-  {
-    id: 'learning-legend',
-    name: 'Learning Legend',
-    description: 'Completed 2000 lectures!',
-    icon: '📖',
-    earned: false,
-    requirement: 'Complete 2000 total lectures'
-  },
-  {
-    id: 'persistence-hero',
-    name: 'Persistence Hero',
-    description: 'Completed 500 perfect days streak!',
-    icon: '🦸‍♂️',
-    earned: false,
-    requirement: 'Complete 500 consecutive perfect days'
-  },
-  {
-    id: 'xp-supreme',
-    name: 'XP Supreme',
-    description: 'Reached 25000 XP!',
-    icon: '🌟',
-    earned: false,
-    requirement: 'Earn 25000 total XP'
-  },
-  {
-    id: 'lecture-overlord',
-    name: 'Lecture Overlord',
-    description: 'Completed 3000 lectures!',
-    icon: '🔮',
-    earned: false,
-    requirement: 'Complete 3000 total lectures'
-  },
-  {
-    id: 'endurance-master',
-    name: 'Endurance Master',
-    description: 'Completed 750 perfect days streak!',
-    icon: '💪',
-    earned: false,
-    requirement: 'Complete 750 consecutive perfect days'
-  },
-  {
-    id: 'wisdom-seeker',
-    name: 'Wisdom Seeker',
-    description: 'Completed 5000 lectures!',
-    icon: '🧙‍♂️',
-    earned: false,
-    requirement: 'Complete 5000 total lectures'
-  },
-  {
-    id: 'ultimate-warrior',
-    name: 'Ultimate Warrior',
-    description: 'Completed 1000 perfect days streak!',
-    icon: '⚡',
-    earned: false,
-    requirement: 'Complete 1000 consecutive perfect days'
-  },
-  {
-    id: 'xp-master',
-    name: 'XP Master',
-    description: 'Reached 50000 XP!',
-    icon: '🎯',
-    earned: false,
-    requirement: 'Earn 50000 total XP'
-  },
-  {
-    id: 'knowledge-warrior',
-    name: 'Knowledge Warrior',
-    description: 'Completed 10000 lectures!',
-    icon: '⚔️',
-    earned: false,
-    requirement: 'Complete 10000 total lectures'
   }
 ];
 
@@ -457,38 +377,28 @@ export function HabitProvider({ children }: { children: React.ReactNode }) {
         { index: 0, condition: hasCompletedLecture }, // First Steps
         { index: 1, condition: todayData.lectures >= 2 }, // Daily Duo
         { index: 2, condition: todayData.lectures >= 3 }, // Perfect Day
-        { index: 3, condition: streak >= 3 }, // On Fire
-        { index: 4, condition: streak >= 7 }, // Weekly Warrior
-        { index: 5, condition: totalXP >= 100 }, // Century Club
-        { index: 6, condition: totalLectures >= 25 }, // Lecture Lover
-        { index: 7, condition: streak >= 10 }, // Dedication Rookie
-        { index: 8, condition: streak >= 30 }, // Month Master
-        { index: 9, condition: totalXP >= 500 }, // XP Legend
-        { index: 10, condition: totalLectures >= 100 }, // Knowledge Seeker
-        { index: 11, condition: streak >= 50 }, // Dedication Master
-        { index: 12, condition: streak >= 14 }, // Consistency Champion
+        { index: 3, condition: todayData.lectures >= 4 }, // Overachiever
+        { index: 4, condition: todayData.lectures >= 5 }, // Backlog Warrior
+        { index: 5, condition: todayData.lectures >= 6 }, // Super Achiever
+        { index: 6, condition: todayData.lectures >= 7 }, // Maximum Effort
+        { index: 7, condition: streak >= 3 }, // On Fire
+        { index: 8, condition: streak >= 7 }, // Weekly Warrior
+        { index: 9, condition: streak >= 14 }, // Dedication Rookie
+        { index: 10, condition: streak >= 30 }, // Month Master
+        { index: 11, condition: totalXP >= 100 }, // Century Club
+        { index: 12, condition: totalXP >= 500 }, // XP Legend
         { index: 13, condition: totalXP >= 1000 }, // XP Titan
-        { index: 14, condition: totalLectures >= 250 }, // Lecture Machine
-        { index: 15, condition: streak >= 100 }, // Unstoppable
-        { index: 16, condition: totalLectures >= 500 }, // Genius Level
-        { index: 17, condition: streak >= 90 }, // Quarter Year Hero
-        { index: 18, condition: totalXP >= 2500 }, // XP Soldier
-        { index: 19, condition: streak >= 180 }, // Half Year Champion
-        { index: 20, condition: streak >= 200 }, // Marathon Runner
-        { index: 21, condition: totalXP >= 5000 }, // XP Commander
-        { index: 22, condition: totalLectures >= 1000 }, // Ultimate Scholar
-        { index: 23, condition: streak >= 300 }, // Consistency King
+        { index: 14, condition: totalXP >= 2500 }, // XP Commander
+        { index: 15, condition: totalXP >= 5000 }, // XP Emperor
+        { index: 16, condition: totalLectures >= 25 }, // Lecture Lover
+        { index: 17, condition: totalLectures >= 50 }, // Knowledge Seeker
+        { index: 18, condition: totalLectures >= 100 }, // Lecture Machine
+        { index: 19, condition: totalLectures >= 200 }, // Genius Level
+        { index: 20, condition: totalLectures >= 365 }, // Ultimate Scholar
+        { index: 21, condition: streak >= 60 }, // Consistency Champion
+        { index: 22, condition: streak >= 100 }, // Persistence Hero
+        { index: 23, condition: streak >= 180 }, // Half Year Champion
         { index: 24, condition: streak >= 365 }, // Year Champion
-        { index: 25, condition: totalXP >= 10000 }, // XP Emperor
-        { index: 26, condition: totalLectures >= 2000 }, // Learning Legend
-        { index: 27, condition: streak >= 500 }, // Persistence Hero
-        { index: 28, condition: totalXP >= 25000 }, // XP Supreme
-        { index: 29, condition: totalLectures >= 3000 }, // Lecture Overlord
-        { index: 30, condition: streak >= 750 }, // Endurance Master
-        { index: 31, condition: totalLectures >= 5000 }, // Wisdom Seeker
-        { index: 32, condition: streak >= 1000 }, // Ultimate Warrior
-        { index: 33, condition: totalXP >= 50000 }, // XP Master
-        { index: 34, condition: totalLectures >= 10000 }, // Knowledge Warrior
       ];
 
       // Safely check and award badges
